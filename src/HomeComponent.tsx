@@ -34,20 +34,20 @@ export class Home extends React.Component<HomeComponentProps, {}> {
         return (
             <div className="App">
 
-                <Navbar bg="dark" variant="dark">
-                    <Navbar.Brand className="brand">eShop</Navbar.Brand>
+                <Navbar bg="primary" variant="dark">
+                    <Navbar.Brand className="brand">Series List</Navbar.Brand>
                     <Navbar.Collapse>
                         <Nav className="mr-auto"/>
                         <Nav>
                             <Nav.Item className="mr-2">
                                 <Link to="/home/cart">
-                                    <Button variant="outline-danger">
-                                        <FontAwesomeIcon icon="shopping-cart"/>Cart
+                                    <Button variant="danger">
+                                        <FontAwesomeIcon icon="bookmark"/> Bookmarks
                                     </Button>
                                 </Link>
                             </Nav.Item>
                             <Nav.Item>
-                                <Button variant="outline-primary" onClick={() => this.logout()}>Sign out</Button>
+                                <Button variant="outline-light" onClick={() => this.logout()}>Sign out</Button>
                             </Nav.Item>
                         </Nav>
                     </Navbar.Collapse>

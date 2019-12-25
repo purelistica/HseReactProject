@@ -1,9 +1,9 @@
 import React from "react";
-import dataService, {ShopItem} from "./DataService";
+import dataService, {SeriesItem} from "./DataService";
 
 interface CartState {
 
-    cartItems: ShopItem[];
+    cartItems: SeriesItem[];
 
 }
 

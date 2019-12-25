@@ -3,18 +3,18 @@ export interface User {
     password: string;
 }
 
-export class ShopItem {
+export class SeriesItem {
 
     id: number;
     title: string;
     image: string;
-    price: number;
+    rate: number;
 
-    constructor(id: number, title: string, image: string, price: number) {
+    constructor(id: number, title: string, image: string, rate: number) {
         this.id = id;
         this.title = title;
         this.image = image;
-        this.price = price;
+        this.rate = rate;
     }
 
 }
@@ -77,7 +77,7 @@ class DataService {
     /**
      * Получить все ShopItem'ы пользователя
      */
-    public async getShopItems(filter: string = ".*"): Promise<ShopItem[]> {
+    public async getSeriesItems(filter: string = ".*"): Promise<SeriesItem[]> {
         // if (this.currentUser == null) {
         //     return Promise.reject("User is not authorized");
         // }
@@ -86,13 +86,13 @@ class DataService {
 
         let response: Response = await todoResponsePromise;
 
-        let jsonPromise: Promise<ShopItem[]> = (response).json();
+        let jsonPromise: Promise<SeriesItem[]> = (response).json();
 
         return await jsonPromise;
     }
 
 
-    public async getCart(): Promise<ShopItem[]> {
+    public async getCart(): Promise<SeriesItem[]> {
         let cartResponsePromise: Promise<Response> = fetch(`${DataService.DB_URL}/cart?login=admin`);
 
         let response: Response = await cartResponsePromise;
@@ -103,7 +103,7 @@ class DataService {
         let shopItems = [];
 
         for (let shopItemId of cart.list) {
-            let tmp: ShopItem[] = await ((await fetch(`${DataService.DB_URL}/shopItem?id=${shopItemId}`)).json());
+            let tmp: SeriesItem[] = await ((await fetch(`${DataService.DB_URL}/shopItem?id=${shopItemId}`)).json());
             let shopItem = tmp[0];
             shopItems.push(shopItem);
         }

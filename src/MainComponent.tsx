@@ -1,20 +1,19 @@
 import * as React from "react";
 import {ReactNode} from "react";
-import dataService, {ShopItem} from "./DataService";
+import dataService, {SeriesItem} from "./DataService";
 import "./home.scss";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import {ShopItemComponent} from "./ShopItemComponent";
+import {SeriesItemComponent} from "./SeriesItemComponent";
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
 
 
 interface MainComponentState {
 
-    items: ShopItem[];
-
+    items: SeriesItem[];
     searchBarValue: string;
 
 }
@@ -30,7 +29,7 @@ export class Main extends React.Component<{}, MainComponentState> {
         };
 
 
-        dataService.getShopItems().then(value => {
+        dataService.getSeriesItems().then(value => {
             this.setState({
                 ...this.state,
                 items: value
@@ -58,11 +57,11 @@ export class Main extends React.Component<{}, MainComponentState> {
     }
 
     componentDidMount(): void {
-        let items: ShopItem[] = [];
+        let items: SeriesItem[] = [];
 
 
         for (let i = 0; i < 20; i++) {
-            items.push(new ShopItem(0, `House ${i}`, "https://specials-images.forbesimg.com/imageserve/1026205392/960x0.jpg?fit=scale", 10));
+            items.push(new SeriesItem(0, `House ${i}`, "https://specials-images.forbesimg.com/imageserve/1026205392/960x0.jpg?fit=scale", 10));
         }
 
         // this.setState({
@@ -79,7 +78,7 @@ export class Main extends React.Component<{}, MainComponentState> {
     }
 
     clickHandler() {
-        dataService.getShopItems(this.state.searchBarValue).then(value => {
+        dataService.getSeriesItems(this.state.searchBarValue).then(value => {
             this.setState({
                 searchBarValue: "",
                 items: value
@@ -106,15 +105,15 @@ export class Main extends React.Component<{}, MainComponentState> {
                     </InputGroup.Append>
                 </InputGroup>
 
-                <Container>
+                <Container className='itemsBox'>
                     {
                         this.arraySplit(this.state.items).map(line => {
                             return (
                                 <Row className="mb-2">
                                     {
                                         line.map(shopItem => {
-                                            return (<Col md="3" xs="12">
-                                                    <ShopItemComponent item={shopItem}/>
+                                            return (<Col md="3" xs="12" className="item">
+                                                    <SeriesItemComponent item={shopItem}/>
                                                 </Col>
                                             )
                                         })
