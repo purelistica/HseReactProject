@@ -2,6 +2,10 @@ import React from "react";
 import dataService, {SeriesItem} from "./DataService";
 import {RouteComponentProps, withRouter} from "react-router";
 import Row from "react-bootstrap/Row";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import Col from "react-bootstrap/Col";
 
 
 interface SeriesProps extends RouteComponentProps<SeriesMatch> {
@@ -46,7 +50,25 @@ export class SeriesComponent extends React.Component<SeriesProps, SeriesComponen
             <div>
                 {
                     this.state.item.map(it => {
-                            return (<h1> {it.title} </h1>)
+                            return (
+                                <Card className="seriesInfo">
+                                    <Card.Body className="infoBody">
+                                        <Row className="mb-2">
+                                            <Col md="3" xs="12">
+                                                <div className="info-card-img"
+                                                     style={{backgroundImage: 'url(' + it.image + ')'}}></div>
+                                            </Col>
+                                            <Col md="9" xs="12">
+                                                <Card.Title className='card-name'>{it.name}</Card.Title>
+                                                <div>{it.description}</div>
+                                                <Button variant="danger" className='card-btn'>
+                                                    <FontAwesomeIcon icon="heart"/>
+                                                </Button>
+                                            </Col>
+                                        </Row>
+                                    </Card.Body>
+                                </Card>
+                            )
                         }
                     )
                 }

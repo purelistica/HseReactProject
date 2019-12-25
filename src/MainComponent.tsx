@@ -61,7 +61,8 @@ export class Main extends React.Component<{}, MainComponentState> {
 
 
         for (let i = 0; i < 20; i++) {
-            items.push(new SeriesItem(0, `House ${i}`, "https://specials-images.forbesimg.com/imageserve/1026205392/960x0.jpg?fit=scale", 10));
+            items.push(new SeriesItem(0, `House ${i}`, "https://specials-images.forbesimg.com/imageserve/1026205392/960x0.jpg?fit=scale",
+                10, "", "", [], ""));
         }
 
         // this.setState({

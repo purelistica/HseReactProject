@@ -22,12 +22,12 @@ export class SeriesItemComponent extends React.Component<ShopItemComponentProps,
                     <div className="card-img"
                      style={{backgroundImage: 'url(' + this.props.item.image + ')'}}></div>
 
-                    <Card.Title className='card-name'>{this.props.item.title}</Card.Title>
+                    <Card.Title className='card-name'>{this.props.item.name}</Card.Title>
                     <Button variant="danger" className='card-btn'>
                         <FontAwesomeIcon icon="heart"/>
                     </Button>
                 </Card.Body>
-                <span className="itemRate"><FontAwesomeIcon icon={faImdb} size="2x"/> {this.props.item.rate}</span>
+                <span className="itemRate"><FontAwesomeIcon icon={faImdb} size="2x"/> {this.props.item.rating}</span>
                     </Link>
             </Card>
         );

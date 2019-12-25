@@ -26,7 +26,7 @@ export class CartComponent extends React.Component<{}, CartState> {
     render(): React.ReactNode {
         return (
             <div>
-                {this.state.cartItems.map(item => (<div key={item.id}>{item.title}</div>))}
+                {this.state.cartItems.map(item => (<div key={item.id}>{item.name}</div>))}
             </div>
         );
     }

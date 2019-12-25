@@ -6,15 +6,24 @@ export interface User {
 export class SeriesItem {
 
     id: number;
-    title: string;
+    name: string;
     image: string;
-    rate: number;
+    rating: number;
+    description: string;
+    link: string;
+    years: String[];
+    genre: string;
 
-    constructor(id: number, title: string, image: string, rate: number) {
+    constructor(id: number, name: string, image: string, rating: number, description: string,
+                link: string, years: String[], genre: string) {
         this.id = id;
-        this.title = title;
+        this.name = name;
         this.image = image;
-        this.rate = rate;
+        this.rating = rating;
+        this.description = description;
+        this.link = link;
+        this.years = years;
+        this.genre = genre;
     }
 
 }
@@ -82,7 +91,7 @@ class DataService {
         //     return Promise.reject("User is not authorized");
         // }
 
-        let todoResponsePromise: Promise<Response> = fetch(`${DataService.DB_URL}/shopItem?title_like=${filter}`);
+        let todoResponsePromise: Promise<Response> = fetch(`${DataService.DB_URL}/shopItem?name_like=${filter}`);
 
         let response: Response = await todoResponsePromise;
 

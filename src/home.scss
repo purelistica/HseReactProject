@@ -83,3 +83,19 @@
 .itemRate svg {
   vertical-align: middle;
 }
+
+.info-card-img {
+  height: 400px;
+  background-repeat: no-repeat;
+  //position: relative;
+  float: left;
+  background-position: 50% 50%;
+  background-size: cover;
+  border-radius: 0;
+  width: 100%;
+}
+
+.info-body {
+  padding: 0;
+  background: transparent;
+}
