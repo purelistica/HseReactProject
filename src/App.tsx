@@ -4,6 +4,7 @@ import LoginPage from "./LoginPage";
 import dataService from "./DataService";
 import Home from "./HomeComponent";
 import {CartComponent} from "./CartComponent";
+import {SeriesComponent} from "./SeriesComponent";
 import Main from "./MainComponent";
 import {renderRoutes} from "react-router-config";
 
@@ -33,6 +34,9 @@ const routes = [
         }, {
             path: "/home/cart",
             component: CartComponent
+        }, {
+            path: "/home/series/:item",
+            component: SeriesComponent
         }]
     },
     {
