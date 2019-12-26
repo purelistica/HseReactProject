@@ -9,6 +9,7 @@ import Col from "react-bootstrap/Col";
 import {SeriesItemComponent} from "./SeriesItemComponent";
 import FormControl from "react-bootstrap/FormControl";
 import InputGroup from "react-bootstrap/InputGroup";
+import {Dropdown, DropdownButton} from "react-bootstrap";
 
 
 interface MainComponentState {
@@ -90,6 +91,13 @@ export class Main extends React.Component<{}, MainComponentState> {
     render(): ReactNode {
         return (
             <div>
+                <h3>Filters and search</h3>
+                <DropdownButton id="dropdown-basic-button" title="Genre" variant="outline-secondary">
+                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                </DropdownButton>
+
                 <InputGroup className="mb-3">
                     <FormControl aria-describedby="basic-addon1"
                                  value={this.state.searchBarValue}
@@ -105,7 +113,7 @@ export class Main extends React.Component<{}, MainComponentState> {
                         <Button variant="outline-secondary" onClick={() => this.clickHandler()}>Найти</Button>
                     </InputGroup.Append>
                 </InputGroup>
-
+                <h3>Series list</h3>
                 <Container className='itemsBox'>
                     {
                         this.arraySplit(this.state.items).map(line => {

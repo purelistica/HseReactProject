@@ -35,7 +35,9 @@ export class Home extends React.Component<HomeComponentProps, {}> {
             <div className="App">
 
                 <Navbar bg="primary" variant="dark">
-                    <Navbar.Brand className="brand">Series List</Navbar.Brand>
+                    <Navbar.Brand className="brand">
+                        <Link to="/">Series List</Link>
+                        </Navbar.Brand>
                     <Navbar.Collapse>
                         <Nav className="mr-auto"/>
                         <Nav>

@@ -1,14 +1,12 @@
 import React from "react";
-import dataService, {SeriesItem} from "./DataService";
+import dataService, {SeriesItem, BookmarkItem} from "./DataService";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import {SeriesItemComponent} from "./SeriesItemComponent";
 import Container from "react-bootstrap/Container";
 import {Link} from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faImdb} from "@fortawesome/free-brands-svg-icons";
 
 
 interface CartState {
@@ -33,6 +31,21 @@ export class CartComponent extends React.Component<{}, CartState> {
         })
     }
 
+    public removeBookmark(id: number) {
+        dataService.getBookmarks().then(value => {
+            let currentBookmarks: number[] = value.list;
+            // console.log(currentBookmarks);
+            let newBookmarks: number[] = currentBookmarks.filter(item => item !== id);
+            // console.log(newBookmarks);
+
+            let new_value: BookmarkItem = value;
+            new_value.list = newBookmarks;
+
+            dataService.deleteItem(id);
+            dataService.updateBookmarks(new_value);
+        });
+    }
+
     render(): React.ReactNode {
         return (
             <div>
@@ -53,7 +66,7 @@ export class CartComponent extends React.Component<{}, CartState> {
                                                         {item.name}
                                                     </Link>
                                                 </Card.Title>
-                                                <Button variant="primary" className='card-btn'>
+                                                <Button variant="primary" className='card-btn' onClick={() => this.removeBookmark(item.id)}>
                                                     <FontAwesomeIcon icon="trash"/>
                                                 </Button>
                                             </Card.Body>

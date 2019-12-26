@@ -1,6 +1,7 @@
 export interface User {
     login: string;
     password: string;
+    id: number;
 }
 
 export class SeriesItem {
@@ -28,9 +29,24 @@ export class SeriesItem {
 
 }
 
-interface Cart {
+interface Bookmark {
     login: string;
     list: number[];
+    id: number;
+}
+
+export class BookmarkItem {
+
+    login: string;
+    list: number[];
+    id: number;
+
+    constructor(login: string, list: number[], id: number) {
+        this.login = login;
+        this.id = id;
+        this.list = list;
+    }
+
 }
 
 // Класс для работы с сервером
@@ -115,8 +131,8 @@ class DataService {
         let cartResponsePromise: Promise<Response> = fetch(`${DataService.DB_URL}/bookmarks?login=admin`);
         let response: Response = await cartResponsePromise;
 
-        let jsonPromise: Promise<Cart[]> = (response).json();
-        let cart: Cart = (await jsonPromise)[0];
+        let jsonPromise: Promise<Bookmark[]> = (response).json();
+        let cart: Bookmark = (await jsonPromise)[0];
 
         let shopItems = [];
 
@@ -129,38 +145,40 @@ class DataService {
         return shopItems;
     }
 
-    /**
-     * Добавить новый TodoItem на сервер
-     * @param newItem новый TodoItem
-     */
-    // public async saveItem(newItem: TodoItem): Promise<TodoItem> {
-    //     if (this.currentUser == null) {
-    //         return Promise.reject("User is not authorized");
-    //     }
-    //
-    //     delete newItem.id;
-    //     let postPromise = fetch(`${DataService.DB_URL}/todo`, {
-    //         headers: {
-    //             'Accept': 'application/json',
-    //             'Content-Type': 'application/json'
-    //         },
-    //         method: "POST",
-    //         body: JSON.stringify(newItem)
-    //     });
-    //     return await (await postPromise).json();
-    // }
+    public async getBookmarks(): Promise<BookmarkItem> {
+        console.log('getBookmarks()');
+        let cartResponsePromise: Promise<Response> = fetch(`${DataService.DB_URL}/bookmarks?id=1`);
+        let response: Response = await cartResponsePromise;
 
-    /**
-     * Удалить TodoItem
-     * @param id идентификатор item'a
-     * @returns true, если получилось удалить
-     */
+        let jsonPromise: Promise<BookmarkItem[]> = (response).json();
+        let cart: BookmarkItem = (await jsonPromise)[0];
+
+        return cart;
+    }
+
+
+    public async updateBookmarks(newItem: BookmarkItem): Promise<boolean> {
+        // if (this.currentUser == null) {
+        //     return Promise.reject("User is not authorized");
+        // }
+
+        let postPromise = fetch(`${DataService.DB_URL}/bookmarks?login=admin`, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify(newItem)
+        });
+        return (await postPromise).ok;
+    }
+
     public async deleteItem(id: number): Promise<boolean> {
-        if (this.currentUser == null) {
-            return Promise.reject("User is not authorized");
-        }
+        // if (this.currentUser == null) {
+        //     return Promise.reject("User is not authorized");
+        // }
 
-        let deletePromise = fetch(`${DataService.DB_URL}/todo/${id}`, {
+        let deletePromise = fetch(`${DataService.DB_URL}/bookmarks/1`, {
             method: "DELETE"
         });
 

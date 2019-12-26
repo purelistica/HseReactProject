@@ -1,10 +1,11 @@
 import React from "react";
-import {SeriesItem} from "./DataService";
+import dataService, {BookmarkItem, SeriesItem} from "./DataService";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faImdb} from '@fortawesome/free-brands-svg-icons';
 import {Link} from "react-router-dom";
+
 
 interface ShopItemComponentProps {
 
@@ -13,6 +14,26 @@ interface ShopItemComponentProps {
 }
 
 export class SeriesItemComponent extends React.Component<ShopItemComponentProps, any> {
+
+        public addBookmark(id: number) {
+        dataService.getBookmarks().then(value => {
+            console.log('addBookmark');
+            console.log(value);
+            let currentBookmarks: number[] = value.list;
+            console.log(currentBookmarks);
+            let newBookmarks: number[] = currentBookmarks;
+            newBookmarks.push(id);
+
+            console.log(newBookmarks);
+
+            let new_value: BookmarkItem = value;
+            new_value.list = newBookmarks;
+            // new_value.id = 0;
+
+            dataService.deleteItem(id);
+            dataService.updateBookmarks(new_value);
+        });
+    }
 
     render(): React.ReactElement<any, string | React.JSXElementConstructor<any>> | string | number | {} | React.ReactNodeArray | React.ReactPortal | boolean | null | undefined {
         return (
@@ -27,7 +48,7 @@ export class SeriesItemComponent extends React.Component<ShopItemComponentProps,
                         <Link to={`/home/series/${this.props.item.id}`}>{this.props.item.name}
                         </Link>
                     </Card.Title>
-                    <Button variant="danger" className='card-btn'>
+                    <Button variant="danger" className='card-btn' onClick={() => this.addBookmark(this.props.item.id)}>
                         <FontAwesomeIcon icon="heart"/>
                     </Button>
                 </Card.Body>
