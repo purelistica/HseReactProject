@@ -33,7 +33,6 @@ export class SeriesComponent extends React.Component<SeriesProps, SeriesComponen
     getItem() {
         console.log("getItem()");
         dataService.getSeries(this.props.match.params.item).then(value => {
-            // console.log(value.title);
             this.setState({
                 item: value
             });
@@ -41,11 +40,19 @@ export class SeriesComponent extends React.Component<SeriesProps, SeriesComponen
     }
 
     componentDidMount(): void {
-        console.log("componentDidMount()");
+    }
+
+    yearsTransform(years: String[]): string {
+        let templ = "";
+        if (years[1]) {
+            templ = `${years[0]} - ${years[1]}`;
+        } else {
+            templ = `${years[0]} - now`;
+        }
+        return (templ)
     }
 
     render(): React.ReactNode {
-        console.log('render');
         return (
             <div>
                 {
@@ -57,13 +64,16 @@ export class SeriesComponent extends React.Component<SeriesProps, SeriesComponen
                                             <Col md="3" xs="12">
                                                 <div className="info-card-img"
                                                      style={{backgroundImage: 'url(' + it.image + ')'}}></div>
-                                            </Col>
-                                            <Col md="9" xs="12">
-                                                <Card.Title className='card-name'>{it.name}</Card.Title>
-                                                <div>{it.description}</div>
-                                                <Button variant="danger" className='card-btn'>
+                                                <Button variant="danger" className='info-like-btn'>
                                                     <FontAwesomeIcon icon="heart"/>
                                                 </Button>
+                                            </Col>
+                                            <Col md="9" xs="12">
+                                                <Card.Title className='info-name'>{it.name}</Card.Title>
+                                                <div className="info-item"><span>Years: </span>{this.yearsTransform(it.years)}</div>
+                                                <div className="info-item"><span>Rate: </span>{it.rating}</div>
+                                                <div className="info-item"><span>Genre: </span>{it.genre}</div>
+                                                <div className="info-item"><span>Description: </span>{it.description}</div>
                                             </Col>
                                         </Row>
                                     </Card.Body>

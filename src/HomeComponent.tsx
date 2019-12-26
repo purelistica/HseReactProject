@@ -42,7 +42,7 @@ export class Home extends React.Component<HomeComponentProps, {}> {
                             <Nav.Item className="mr-2">
                                 <Link to="/home/cart">
                                     <Button variant="danger">
-                                        <FontAwesomeIcon icon="bookmark"/> Bookmarks
+                                        <FontAwesomeIcon icon="heart"/> Bookmarks
                                     </Button>
                                 </Link>
                             </Nav.Item>

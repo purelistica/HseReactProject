@@ -38,14 +38,17 @@
 }
 
 .item {
-  padding: 0;
-  margin: 0 5px 0 5px;
+  display: inline-block;
+//  padding: 0;
+//  margin: 0 5px 0 5px;
 }
 
 .itemsBox {
   padding: 0;
-  margin: 0;
+  //margin: 0;
   box-sizing: border-box;
+      margin: 0px auto;
+    width: 100%;
 }
 
 .card-img-body {
@@ -98,4 +101,16 @@
 .info-body {
   padding: 0;
   background: transparent;
+}
+
+.info-item span {
+  font-weight: bold;
+}
+
+.info-like-btn {
+    width: 100%;
+    display: block;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 0;
 }

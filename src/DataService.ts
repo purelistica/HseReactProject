@@ -112,8 +112,7 @@ class DataService {
 
 
     public async getCart(): Promise<SeriesItem[]> {
-        let cartResponsePromise: Promise<Response> = fetch(`${DataService.DB_URL}/cart?login=admin`);
-
+        let cartResponsePromise: Promise<Response> = fetch(`${DataService.DB_URL}/bookmarks?login=admin`);
         let response: Response = await cartResponsePromise;
 
         let jsonPromise: Promise<Cart[]> = (response).json();
