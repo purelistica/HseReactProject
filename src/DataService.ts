@@ -99,9 +99,7 @@ class DataService {
         this.currentUser = null;
     }
 
-    /**
-     * Получить все ShopItem'ы пользователя
-     */
+
     public async getSeriesItems(filter: string = ".*"): Promise<SeriesItem[]> {
         // if (this.currentUser == null) {
         //     return Promise.reject("User is not authorized");
@@ -149,7 +147,6 @@ class DataService {
     }
 
     public async getBookmarks(): Promise<BookmarkItem> {
-        console.log('getBookmarks()');
         let cartResponsePromise: Promise<Response> = fetch(`${DataService.DB_URL}/bookmarks?id=1`);
         let response: Response = await cartResponsePromise;
 
