@@ -17,18 +17,11 @@ export class SeriesItemComponent extends React.Component<ShopItemComponentProps,
 
         public addBookmark(id: number) {
         dataService.getBookmarks().then(value => {
-            console.log('addBookmark');
-            console.log(value);
             let currentBookmarks: number[] = value.list;
-            console.log(currentBookmarks);
             let newBookmarks: number[] = currentBookmarks;
             newBookmarks.push(id);
-
-            console.log(newBookmarks);
-
             let new_value: BookmarkItem = value;
             new_value.list = newBookmarks;
-            // new_value.id = 0;
 
             dataService.deleteItem(id);
             dataService.updateBookmarks(new_value);

@@ -34,9 +34,7 @@ export class CartComponent extends React.Component<{}, CartState> {
     public removeBookmark(id: number) {
         dataService.getBookmarks().then(value => {
             let currentBookmarks: number[] = value.list;
-            // console.log(currentBookmarks);
             let newBookmarks: number[] = currentBookmarks.filter(item => item !== id);
-            // console.log(newBookmarks);
 
             let new_value: BookmarkItem = value;
             new_value.list = newBookmarks;

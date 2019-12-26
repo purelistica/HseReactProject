@@ -65,11 +65,6 @@ export class Main extends React.Component<{}, MainComponentState> {
             items.push(new SeriesItem(0, `House ${i}`, "https://specials-images.forbesimg.com/imageserve/1026205392/960x0.jpg?fit=scale",
                 10, "", "", [], ""));
         }
-
-        // this.setState({
-        //     items: this.arraySplit(items)
-        // });
-
     }
 
     changeHandler(newValue: string) {
@@ -88,31 +83,54 @@ export class Main extends React.Component<{}, MainComponentState> {
         });
     }
 
+    filterHandler(genre: string){
+        dataService.getSeriesByGenre(genre).then(value => {
+            this.setState({
+                searchBarValue: "",
+                items: value
+            });
+        });
+    }
+
     render(): ReactNode {
         return (
             <div>
                 <h3>Filters and search</h3>
-                <DropdownButton id="dropdown-basic-button" title="Genre" variant="outline-secondary">
-                    <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                    <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-                </DropdownButton>
-
-                <InputGroup className="mb-3">
-                    <FormControl aria-describedby="basic-addon1"
-                                 value={this.state.searchBarValue}
-                                 onKeyPress={
-                                     (event: any) => {
-                                         if (event.key === "Enter") {
-                                             this.clickHandler();
+                <Row className="filtersBox">
+                    <Col md="3" xs="12">
+                    <DropdownButton id="dropdown-basic-button" title="Genre" variant="outline-secondary">
+                        <Dropdown.Item as="button" onClick={() => {
+                            this.filterHandler("Comedy")
+                        }}>Comedy</Dropdown.Item>
+                        <Dropdown.Item as="button" onClick={() => {
+                            this.filterHandler("Crime")
+                        }}>Crime</Dropdown.Item>
+                        <Dropdown.Item as="button" onClick={() => {
+                            this.filterHandler("Drama")
+                        }}>Drama</Dropdown.Item>
+                        <Dropdown.Item as="button" onClick={() => {
+                            this.filterHandler("Thriller")
+                        }}>Thriller</Dropdown.Item>
+                    </DropdownButton>
+                    </Col>
+                    <Col md="9" xs="12">
+                    <InputGroup className="mb-3">
+                        <FormControl aria-describedby="basic-addon1"
+                                     value={this.state.searchBarValue}
+                                     onKeyPress={
+                                         (event: any) => {
+                                             if (event.key === "Enter") {
+                                                 this.clickHandler();
+                                             }
                                          }
                                      }
-                                 }
-                                 onChange={(event: any) => this.changeHandler((event.target as any).value)}/>
-                    <InputGroup.Append>
-                        <Button variant="outline-secondary" onClick={() => this.clickHandler()}>Найти</Button>
-                    </InputGroup.Append>
-                </InputGroup>
+                                     onChange={(event: any) => this.changeHandler((event.target as any).value)}/>
+                        <InputGroup.Append>
+                            <Button variant="outline-secondary" onClick={() => this.clickHandler()}>Найти</Button>
+                        </InputGroup.Append>
+                    </InputGroup>
+                    </Col>
+                </Row>
                 <h3>Series list</h3>
                 <Container className='itemsBox'>
                     {

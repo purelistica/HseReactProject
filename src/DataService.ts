@@ -106,13 +106,16 @@ class DataService {
         // if (this.currentUser == null) {
         //     return Promise.reject("User is not authorized");
         // }
-
         let todoResponsePromise: Promise<Response> = fetch(`${DataService.DB_URL}/shopItem?name_like=${filter}`);
-
         let response: Response = await todoResponsePromise;
-
         let jsonPromise: Promise<SeriesItem[]> = (response).json();
+        return await jsonPromise;
+    }
 
+    public async getSeriesByGenre(filter: string = ".*"): Promise<SeriesItem[]> {
+        let todoResponsePromise: Promise<Response> = fetch(`${DataService.DB_URL}/shopItem?genre_like=${filter}`);
+        let response: Response = await todoResponsePromise;
+        let jsonPromise: Promise<SeriesItem[]> = (response).json();
         return await jsonPromise;
     }
 
